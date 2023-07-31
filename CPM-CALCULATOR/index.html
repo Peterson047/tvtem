@@ -35,9 +35,9 @@
     </header>
     <main>
         <div class="flex flex-col-reverse align-center justify-center m-auto md:max-w-8xl p-10 md:flex-row">
-            <div class="w-full md:w-2/3 mr-1">
+            <div class="w-full md:w-2/3 mr-0">
                 <div class="mb-5">
-                    <h2>VÍDEO|VGLOBO</h2>
+                    <h2 class="md:max">Tabela de VÍDEO|VGLOBO</h2>
                     <table>
                         <tr>
                             <th>Vídeo</th>
@@ -48,35 +48,69 @@
                         <tr>
                             <td>Outstream - comercial de 07" a 60" com áudio sem skip</td>
                             <td>R$ 60,00</td>
-                            <td><input type="number" id="impressions1" value="0" onchange="calculateInvestment(1)">
+                            <td><input type="number" id="impressions1" value="0"
+                                    onchange="calculateInvestmentTable1(1)">
                             </td>
                             <td><input type="text" disabled id="investment1" value="518.00"></td>
                         </tr>
                         <tr>
                             <td>Pré-Roll - Bumper Ad até 06" sem skip</td>
                             <td>R$ 60,00</td>
-                            <td><input type="number" id="impressions2" value="0" onchange="calculateInvestment(2)">
+                            <td><input type="number" id="impressions2" value="0"
+                                    onchange="calculateInvestmentTable1(2)">
                             </td>
                             <td><input type="text" disabled id="investment2" value="0"></td>
                         </tr>
                         <tr>
                             <td>Pré-Roll - Comercial até 15" sem skip</td>
                             <td>R$ 200,00</td>
-                            <td><input type="number" id="impressions3" value="0" onchange="calculateInvestment(3, 200)">
+                            <td><input type="number" id="impressions3" value="0"
+                                    onchange="calculateInvestmentTable1(3, 200)">
                             </td>
                             <td><input type="text" disabled id="investment3" value="0"></td>
                         </tr>
                         <tr>
                             <td>Pré-Roll - Comercial de 30" até 180" com skip</td>
                             <td>R$ 150,00</td>
-                            <td><input type="number" id="impressions4" value="0" onchange="calculateInvestment(4, 150)">
+                            <td><input type="number" id="impressions4" value="0"
+                                    onchange="calculateInvestmentTable1(4, 150)">
                             </td>
                             <td><input type="text" disabled id="investment4" value="518.00"></td>
                         </tr>
                     </table>
+                    <br>
+                    <br>
+                    <h2>Tabela de DISPLAY | DGLOBO</h2>
+                    <table>
+                        <tr>
+                            <th>Vídeo</th>
+                            <th>CPM</th>
+                            <th>Impressões</th>
+                            <th>Investimento do Cliente</th>
+                        </tr>
+                        <tr>
+                            <td>Maxiboard, Billboard e Retângulo (todas as posições)</td>
+                            <td>R$ 20,00</td>
+                            <td><input type="number" id="impressions5" value="0"
+                                    onchange="calculateInvestmentTable2(5)">
+                            </td>
+                            <td><input type="text" disabled id="investment5" value="618.80"></td>
+                        </tr>
+                        <tr>
+                            <td>banner contextualizado</td>
+                            <td>R$ 29,00</td>
+                            <td><input type="number" id="impressions6" value="0"
+                                    onchange="calculateInvestmentTable2(6)">
+                            </td>
+                            <td><input type="text" disabled id="investment6" value="0"></td>
+                        </tr>
+                    </table>
 
                     <script>
-                        function calculateInvestment(rowNumber, multiplier = 60) {
+                        const cpmTable1 = [60, 60, 200, 150];
+                        const cpmTable2 = [20, 29];
+
+                        function calculateInvestmentTable1(rowNumber, multiplier = 60) {
                             const impressionsInput = document.getElementById(`impressions${rowNumber}`);
                             const investmentInput = document.getElementById(`investment${rowNumber}`);
 
@@ -84,61 +118,35 @@
                             if (isNaN(impressionsValue)) {
                                 investmentInput.value = "0.00";
                             } else {
-                                const investmentValue = impressionsValue * multiplier;
+                                const investmentValue = impressionsValue * cpmTable1[rowNumber - 1];
+                                investmentInput.value = investmentValue.toFixed(2);
+                            }
+                        }
+
+                        function calculateInvestmentTable2(rowNumber, multiplier = 60) {
+                            const impressionsInput = document.getElementById(`impressions${rowNumber}`);
+                            const investmentInput = document.getElementById(`investment${rowNumber}`);
+
+                            const impressionsValue = parseFloat(impressionsInput.value);
+                            if (isNaN(impressionsValue)) {
+                                investmentInput.value = "0.00";
+                            } else {
+                                const investmentValue = impressionsValue * cpmTable2[rowNumber - 5];
                                 investmentInput.value = investmentValue.toFixed(2);
                             }
                         }
 
                         // Calculate all investments when the page loads
                         window.onload = function () {
-                            calculateInvestment(1);
-                            calculateInvestment(2);
-                            calculateInvestment(3, 200);
-                            calculateInvestment(4, 150);
+                            calculateInvestmentTable1(1);
+                            calculateInvestmentTable1(2);
+                            calculateInvestmentTable1(3, 200);
+                            calculateInvestmentTable1(4, 150);
+                            calculateInvestmentTable2(5);
+                            calculateInvestmentTable2(6);
                         };
                     </script>
                 </div>
-                <div class="mb-5">
-                    <h2>DISPLAY|VGLOBO</h2>
-                    <table>
-                        <tr>
-                            <th>Vídeo</th>
-                            <th>CPM</th>
-                            <th>Impressões</th>
-                            <th>Investimento do Cliente</th>
-                        </tr>
-                        <tr>
-                            <td>Outstream - comercial de 07" a 60" com áudio sem skip</td>
-                            <td>R$ 60,00</td>
-                            <td><input type="number" id="impressions1" value="0" onchange="calculateInvestment(1)">
-                            </td>
-                            <td><input type="text" disabled id="investment1" value="518.00"></td>
-                        </tr>
-                        <tr>
-                            <td>Pré-Roll - Bumper Ad até 06" sem skip</td>
-                            <td>R$ 60,00</td>
-                            <td><input type="number" id="impressions2" value="0" onchange="calculateInvestment(2)">
-                            </td>
-                            <td><input type="text" disabled id="investment2" value="0"></td>
-                        </tr>
-                        <tr>
-                            <td>Pré-Roll - Comercial até 15" sem skip</td>
-                            <td>R$ 200,00</td>
-                            <td><input type="number" id="impressions3" value="0" onchange="calculateInvestment(3, 200)">
-                            </td>
-                            <td><input type="text" disabled id="investment3" value="0"></td>
-                        </tr>
-                        <tr>
-                            <td>Pré-Roll - Comercial de 30" até 180" com skip</td>
-                            <td>R$ 150,00</td>
-                            <td><input type="number" id="impressions4" value="0" onchange="calculateInvestment(4, 150)">
-                            </td>
-                            <td><input type="text" disabled id="investment4" value="518.00"></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </div>
     </main>
 </head>
 
