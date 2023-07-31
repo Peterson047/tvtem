@@ -60,6 +60,7 @@
     color: #21272e;
     padding: 10px;
     text-transform: uppercase;
+    text-align: center;
   }
 
   .table-bordered td:hover {
@@ -135,10 +136,10 @@
 </div>
 
 <script type="text/javascript">
-  // Define um intervalo de tempo para chamar a função "call()" a cada 95000 milissegundos (95 segundos)
+  // Define um intervalo de tempo para chamar a função "call()" a cada 10000 milissegundos (10 segundos)
   setInterval(function () {
     call();
-  }, 95000);
+  }, 10000);
 
   // Define a função "call()" que faz várias chamadas para a função "get()" com diferentes ações como parâmetro
   function call() {
